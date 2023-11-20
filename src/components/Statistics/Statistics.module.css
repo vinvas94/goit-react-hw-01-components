@@ -16,3 +16,7 @@
   flex-direction: column;
   gap: 12px;
 }
+
+.title {
+  text-align: center;
+}

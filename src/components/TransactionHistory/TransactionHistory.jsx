@@ -1,12 +1,8 @@
-import transactions from '../../transactions.json';
+import PropTypes from 'prop-types';
 import css from '../TransactionHistory/TransactionHistory.module.css';
+import { getRandomHexColor } from 'helpers/randomColor';
 
-export const TransactionHistory = () => {
-  function getRandomHexColor() {
-    return `#${Math.floor(Math.random() * 16777215)
-      .toString(16)
-      .padStart(6, 0)}`;
-  }
+export default function TransactionHistory({ items }) {
   return (
     <table className={css.transactionHistory}>
       <thead>
@@ -17,15 +13,27 @@ export const TransactionHistory = () => {
         </tr>
       </thead>
 
-      {transactions.map((transact, index) => (
-        <tbody key={index}>
-          <tr id={transact.id} style={{ backgroundColor: getRandomHexColor() }}>
-            <td>{transact.type}</td>
-            <td>{transact.amount}</td>
-            <td>{transact.currency}</td>
+      {items.map(({ id, type, amount, currency }) => (
+        <tbody key={id}>
+          <tr style={{ backgroundColor: getRandomHexColor() }}>
+            <td>{type}</td>
+            <td>{amount}</td>
+            <td>{currency}</td>
           </tr>
         </tbody>
       ))}
     </table>
   );
+}
+
+TransactionHistory.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      amount: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+        .isRequired,
+      currency: PropTypes.string.isRequired,
+    })
+  ),
 };
