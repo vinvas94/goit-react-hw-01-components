@@ -8,19 +8,3 @@
   justify-content: center;
   text-align: center;
 }
-
-.status {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: 16px;
-}
-
-.red {
-  background-color: red;
-}
-
-.green {
-  background-color: green;
-}
